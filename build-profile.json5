@@ -36,6 +36,10 @@
           ]
         }
       ]
+    },
+    {
+      "name": "swipelayout",
+      "srcPath": "./swipelayout"
     }
   ]
 }
