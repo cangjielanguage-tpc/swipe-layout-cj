@@ -41,6 +41,10 @@ class MyView {
     func onAccept(index: Int32) {
         if (index == 0) {
             Router.push(url: "CustomContainerUser")
+        }else if (index == 1) {
+            Router.push(url: "CustomContainerUserGrid")
+        }else if (index == 2) {
+            Router.push(url: "CustomContainerUserList")
         }
     }
 
@@ -78,6 +82,20 @@ class CustomDialogExample {
                     evt =>
                     this.controller.getOrThrow().close()
                     this.confirm(0)
+                }
+            )
+            Text("GridView").width(100.percent).height(60).padding(left: 20).fontSize(18).margin(top: 10).onClick(
+                {
+                    evt =>
+                    this.controller.getOrThrow().close()
+                    this.confirm(1)
+                }
+            )
+            Text("ListView").width(100.percent).height(60).padding(left: 20).fontSize(18).margin(top: 10).onClick(
+                {
+                    evt =>
+                    this.controller.getOrThrow().close()
+                    this.confirm(2)
                 }
             )
         }.backgroundColor(0xb0a6a6)
