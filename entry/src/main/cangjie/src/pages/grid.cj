@@ -21,7 +21,13 @@ class CustomContainerUserGrid {
     private let mHeight: Float64 = 80.0
 
     @Builder
-    func bottomViewRight() {
+    func surfaceView(itemContent: String, itemId: Int64) {
+            Text("${itemContent + this.text}").fontSize(16).width(100.percent).height(80.0).fontColor(0x000000).backgroundColor(
+        Color.WHITE).padding(5)
+    }
+
+    @Builder
+    func bottomViewRight(itemId: Int64) {
         Image(@r(app.media.trash)).backgroundColor(0xff64e3b9).width(100.percent).height(100.percent).padding(8).
             objectFit(ImageFit.Contain).onClick({
             evt => PromptAction.showToast(
@@ -37,14 +43,16 @@ class CustomContainerUserGrid {
                 ForEach(
                     this.arr,
                     itemGeneratorFunc: {
-                        item: Int32, _: Int64 => GridItem {
+                        item: Int32, index: Int64 => GridItem {
                             ColumnSplit() {
                                 SwipeLayoutLayDownFullGrid(
+                                    surfaceView: surfaceView,
                                     bottomViewRight: bottomViewRight,
                                     mWidth: 100.0,
                                     mHeight: mHeight,
                                     bottomViewRightW: bottomViewRightW,
-                                    itemContent: "${item.toString() + this.text}"
+                                    itemContent: item.toString(),
+                                    itemId: index
                                 )
                             }.backgroundColor(0xd2d3cc)
                         }

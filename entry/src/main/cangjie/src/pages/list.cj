@@ -1,5 +1,5 @@
-/**
- * Created on 2024/9/26
+/*
+ * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights resvered.
  */
 package ohos_app_cangjie_entry.pages
 internal import cj_res_entry.app
@@ -25,7 +25,12 @@ public class CustomContainerUserList {
         this.disWidth = getDefaultDisplaySync().width
     }
     @Builder
-    func bottomViewRight() {
+    func surfaceView(itemContent: String, itemId: Int64) {
+            Text("${itemContent + this.text}").fontSize(16).width(100.percent).height(90).fontColor(Color.BLACK).padding(
+                5).backgroundColor(Color.WHITE)
+    }
+    @Builder
+    func bottomViewRight(itemId: Int64) {
         Image(@r(app.media.trash)).backgroundColor(0xff64e3b9).width(10.percent).height(100.percent).padding(10).objectFit(
             ImageFit.Contain).onClick({
             evt => PromptAction.showToast(
@@ -55,18 +60,20 @@ public class CustomContainerUserList {
                 ForEach(
                     this.arr,
                     itemGeneratorFunc: {
-                        item: Int64, _: Int64 => ListItem() {
+                        item: Int64, index: Int64 => ListItem() {
                             SwipeLayoutLayDownFullList(
                                 bottomViewRightW: Float64(this.disWidth),
+                                surfaceView: surfaceView,
                                 bottomViewRight: bottomViewRight,
                                 mWidth: 100.0,
-                                mHeight: 60.0,
-                                itemContent: "${item}${this.text}"
+                                mHeight: 90.0,
+                                itemContent: item.toString(),
+                                itemId: index
                             )
                         }
                     }
                 )
-            }.divider(strokeWidth: 1.px, color: Color(0xd2d3cc)).width(100.percent)
+            }.divider(strokeWidth: 5.px, color: Color(0xd2d3cc)).width(100.percent)
         }.width(100.percent).height(100.percent).backgroundColor(0xDCDCDC).padding(top: 5)
     }
 }

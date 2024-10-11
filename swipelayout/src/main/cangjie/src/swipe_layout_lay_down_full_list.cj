@@ -15,6 +15,10 @@ import std.math.abs
 
 @Component
 public class SwipeLayoutLayDownFullList {
+    @Link
+    var itemContent: String = ""
+    @Link
+    var itemId: Int64 = 0
     private var mDuration: Int32 = 200
     private var sX: Float64 = 0.0
     private var sY: Float64 = 0.0
@@ -24,9 +28,10 @@ public class SwipeLayoutLayDownFullList {
     private var bottomViewLeftW: Float64 = 120.0
     private var bottomViewTopH: Float64 = 100.0
     private var bottomViewBottomH: Float64 = 100.0
-    private var itemContent: String = ""
     @BuilderParam
-    let bottomViewRight: () -> Unit
+    let surfaceView: (String, Int64) -> Unit
+    @BuilderParam
+    let bottomViewRight: (Int64) -> Unit
     @State
     var offsetX: Float64 = 0.0
     @State
@@ -38,8 +43,9 @@ public class SwipeLayoutLayDownFullList {
 
     func build() {
         Row() {
-            Text(this.itemContent).fontSize(14).width(100.percent).height(this.mHeight).fontColor(Color.BLACK).padding(
-                5).backgroundColor(Color.WHITE).onTouch(
+            Row() {
+                this.surfaceView(itemContent, itemId)
+            }.onTouch(
                 {
                     event =>
                     if (event.eventType.toString() == "Down") {
@@ -179,9 +185,9 @@ public class SwipeLayoutLayDownFullList {
                     }
                 }
             )
-
+            
             Row() {
-                this.bottomViewRight()
+                this.bottomViewRight(itemId)
             }.height(this.mHeight).width(px2vp(this.bottomViewRightW.px) ?? this.bottomViewRightW.px).onTouch(
                 {
                     event =>
