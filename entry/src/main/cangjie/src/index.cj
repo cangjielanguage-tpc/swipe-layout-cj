@@ -54,7 +54,7 @@ class MyView {
     func surfaceView() {
         Text(
             "SwipeLayout 用于设置屏幕顶部、底部、左侧和右侧的滑动布局。").
-            fontSize(12).width(100.percent).height(100).fontColor(Color.BLACK).padding(5).maxLines(2).onClick(
+            fontSize(14).width(100.percent).height(100).fontColor(Color.BLACK).padding(5).maxLines(2).onClick(
             {
             evt => PromptAction.showToast(
                 message: "Click on surface",
@@ -64,7 +64,7 @@ class MyView {
     }
     @Builder
     func layOutsurfaceView() {
-        Text("用平和的心态交往时间。").fontSize(12).width(100.percent).height(100).fontColor(Color.BLACK).padding(5).
+        Text("用平和的心态交往时间。").fontSize(14).width(100.percent).height(100).fontColor(Color.BLACK).padding(5).
             maxLines(2).onClick({
             evt => PromptAction.showToast(
                 message: "Click on surface",
@@ -74,7 +74,7 @@ class MyView {
     }
     @Builder
     func fullsurfaceView() {
-        Text("SwipeLayout is used to set the swipe layouts on the top, bottom, left, and right of the screen. ").fontSize(12).width(
+        Text("SwipeLayout is used to set the swipe layouts on the top, bottom, left, and right of the screen. ").fontSize(14).width(
             100.percent).height(100).fontColor(Color.BLACK).padding(5).maxLines(2).onClick(
             {
             evt => PromptAction.showToast(

@@ -14,6 +14,10 @@ import std.math.abs
 
 @Component
 public class SwipeLayoutLayDownFullGrid {
+    @Link
+    var itemContent: String = ""
+    @Link
+    var itemId: Int64 = 0
     private var mDuration: Int32 = 200
     private var sX: Float64 = 0.0
     private var sY: Float64 = 0.0
@@ -23,9 +27,10 @@ public class SwipeLayoutLayDownFullGrid {
     private var bottomViewLeftW: Float64 = 120.0
     private var bottomViewTopH: Float64 = 100.0
     private var bottomViewBottomH: Float64 = 100.0
-    private var itemContent: String = ""
     @BuilderParam
-    let bottomViewRight: () -> Unit
+    let surfaceView: (String, Int64) -> Unit
+    @BuilderParam
+    let bottomViewRight: (Int64) -> Unit
     @State
     var offsetX: Float64 = 0.0
     @State
@@ -39,8 +44,7 @@ public class SwipeLayoutLayDownFullGrid {
         Column() {
             Row() {
                 Column() {
-                    Text(itemContent).fontSize(16).width(100.percent).height(80.0).fontColor(0x000000).backgroundColor(
-                        Color.WHITE).padding(5)
+                    this.surfaceView(itemContent, itemId)
                 }.onTouch(
                     {
                         event =>
@@ -165,7 +169,7 @@ public class SwipeLayoutLayDownFullGrid {
                 )
                 Column() {
                     Row() {
-                        this.bottomViewRight()
+                        this.bottomViewRight(itemId)
                     }.height(this.mHeight).width(this.bottomViewRightW)
                 }.onTouch(
                     {
