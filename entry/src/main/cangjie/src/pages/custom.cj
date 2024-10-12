@@ -20,7 +20,6 @@ class CustomContainerUser {
     private let bottomViewTopH: Float64 = 100.0
     private let mHeight: Float64 = 700.0
 
-
     @Builder
     func SurfaceView() {
         Text(

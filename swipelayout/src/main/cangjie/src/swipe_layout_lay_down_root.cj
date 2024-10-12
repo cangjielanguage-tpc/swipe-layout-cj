@@ -25,7 +25,6 @@ public class SwipeLayoutLayDownRoot {
     private var bottomViewLeftW: Float64 = 120.0
     private var bottomViewTopH: Float64 = 120.0
     private var bottomViewBottomH: Float64 = 720.0
-    private var bottomImageBottomH: Float64 = 120.0
 
     @BuilderParam
     let bottomViewRight: () -> Unit

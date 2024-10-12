@@ -34,7 +34,6 @@ public class SwipeLayout {
     private var mHeight: Float64 = 180.0
     private var bottomViewRightW: Float64 = 180.0
     private var bottomViewLeftW: Float64 = 180.0
-    private var bottomViewBottomH: Float64 = 180.0
     private var layoutRight: Bool = true
     private var layoutLeft: Bool = true
     private var layoutBottom: Bool = true
@@ -173,13 +172,13 @@ public class SwipeLayout {
                                     if (layoutTop && moveY > 0.0) { //下滑
                                         //底部菜单开始关闭
                                         if (this.offsetY < 0.0) {
-                                            if (moveY - this.mHeight <= 0.0) { //(moveY - this.bottomViewBottomH <= 0.0)
+                                            if (moveY - this.mHeight <= 0.0) {
                                                 this.offsetY = moveY - this.mHeight
                                                 return
                                             }
                                         }
                                         //当前移动距离小于右侧View的宽度，并且没有处于刚好拉出的状态
-                                        if (this.offsetY < this.mHeight) { //this.offsetY < this.bottomViewTopH
+                                        if (this.offsetY < this.mHeight) {
                                             this.offsetY = moveY
                                         } else {
                                             this.offsetY = this.mHeight

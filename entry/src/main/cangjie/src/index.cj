@@ -273,7 +273,6 @@ class MyView {
                         SwipeLayoutLayDownRoot(
                             bottomViewLeftW: 120.0,
                             bottomViewRightW: 120.0,
-                            bottomImageBottomH: 120.0,
                             mWidth: 100.0,
                             mHeight: 1080.0,
                             bottomViewRight: rootBottomViewRight,
