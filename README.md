@@ -256,8 +256,8 @@ class CustomContainerUserGrid {
 
 在下述版本验证通过：
 
-    DevEco Studio NEXT Developer Beta2(5.0.3.800) 
-    Cangjie Support Plugin 5.0.3.800
+    DevEco Studio NEXT Developer Beta2(5.0.3.900) 
+    Cangjie Support Plugin 5.0.3.900
 
 ## 开源协议
 
