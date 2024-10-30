@@ -109,7 +109,6 @@ import ohos.base.*
 import ohos.component.*
 import ohos.state_manage.*
 import ohos.state_macro_manage.*
-import ohos.hilog.*
 import ohos.prompt_action.*
 
 @Entry

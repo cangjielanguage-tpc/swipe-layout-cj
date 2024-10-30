@@ -1,5 +1,5 @@
 /*
- * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights resvered.
+ * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package swipelayout
 
@@ -10,7 +10,6 @@ import ohos.state_macro_manage.*
 import ohos.resource_manager.*
 import cj_res_swipelayout.app
 import ohos.prompt_action.*
-import ohos.hilog.*
 import std.math.abs
 
 @Component
@@ -43,6 +42,14 @@ public class SwipeLayoutLayDown {
     private var rightSlideEnable: Bool = true
     private var leftSlideEnable: Bool = true
     private var previousX: Float64 = 0.0
+
+    protected override func aboutToAppear() {
+        this.mWidth = if (this.mWidth > 100.0) {
+            100.0
+        } else {
+            this.mWidth
+        }
+    }
 
     func build() {
         Column() {
@@ -185,10 +192,8 @@ public class SwipeLayoutLayDown {
 
                                         //当前移动距离小于右侧View的宽度，并且没有处于刚好拉出的状态
                                         if (this.offsetY < this.bottomViewTopH) {
-                                            Hilog.info(0x0000, "test", "move--//--${this.offsetY}")
                                             this.offsetY = moveY
                                         } else {
-                                            Hilog.info(0x0000, "test", "move---//--end")
                                             this.offsetY = this.bottomViewTopH
                                         }
                                     } else if (moveY < 0.0) { //上滑

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights resvered.
+ * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package swipelayout
 
@@ -44,6 +44,14 @@ public class SwipeLayoutLayDownRoot {
     private var rightSlideEnable: Bool = true
     private var leftSlideEnable: Bool = true
     private var previousX: Float64 = 0.0
+
+    protected override func aboutToAppear() {
+        this.mWidth = if (this.mWidth > 100.0) {
+            100.0
+        } else {
+            this.mWidth
+        }
+    }
 
     func build() {
         Column() {
