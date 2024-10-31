@@ -1,5 +1,5 @@
 /*
- * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights resvered.
+ * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package swipelayout
 
@@ -11,6 +11,7 @@ import ohos.resource_manager.*
 import cj_res_swipelayout.app
 import ohos.prompt_action.*
 import std.math.abs
+import ohos.display.*
 
 @Component
 public class SwipeLayoutLayDownFullGrid {
@@ -39,6 +40,23 @@ public class SwipeLayoutLayDownFullGrid {
     private var leftSlideEnable: Bool = true
     private var previousX: Float64 = 0.0
     private var enableSlide: Array<Bool> = [false, true, true, false]
+
+    protected override func aboutToAppear() {
+        var screenW: Float64 = px2vp(Length(Float64(getDefaultDisplaySync().width), unitType: LengthType.px)).getOrThrow(
+            ).value
+        this.bottomViewRightW = if (bottomViewRightW >= screenW) {
+            screenW
+        } else if (bottomViewRightW < 0.0) {
+            0.0
+        } else {
+            this.bottomViewRightW
+        }
+        this.mWidth = if (this.mWidth > 100.0) {
+            100.0
+        } else {
+            this.mWidth
+        }
+    }
 
     func build() {
         Column() {

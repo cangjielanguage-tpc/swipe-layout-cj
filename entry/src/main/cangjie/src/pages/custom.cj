@@ -1,5 +1,5 @@
 /*
- * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights resvered.
+ * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package ohos_app_cangjie_entry.pages
 
@@ -16,7 +16,7 @@ import ohos.prompt_action.*
 class CustomContainerUser {
     private let bottomViewRightW: Float64 = 120.0
     private let bottomViewLeftW: Float64 = 120.0
-    private let bottomImageBottomH: Float64 = 120.0
+    private let bottomViewBottomH: Float64 = 120.0
     private let bottomViewTopH: Float64 = 100.0
     private let mHeight: Float64 = 700.0
 
@@ -91,7 +91,7 @@ class CustomContainerUser {
                 message: "click down",
                 duration: 1500,
             )
-        }).height(mHeight).width(100.percent)
+        }).height(bottomViewTopH).width(100.percent)
     }
 
     @Builder
@@ -102,7 +102,7 @@ class CustomContainerUser {
                 message: "click search",
                 duration: 1500,
             )
-        }).height(mHeight).width(100.percent)
+        }).height(bottomViewBottomH).width(100.percent)
     }
 
     func build() {
@@ -123,6 +123,8 @@ class CustomContainerUser {
                     bottomViewBottom: BottomViewBottom,
                     bottomViewLeftW: 120.0,
                     bottomViewRightW: 120.0,
+                    bottomViewTopH: bottomViewTopH,
+                    bottomViewBottomH: bottomViewBottomH,
                     mWidth: 100.0,
                     mHeight: 700.0,
                     parentIsTouch: true
