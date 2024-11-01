@@ -5,7 +5,7 @@
 <p align="center">
 <img alt="" src="https://img.shields.io/badge/release-v0.0.1-brightgreen" style="display: inline-block;" />
 <img alt="" src="https://img.shields.io/badge/build-pass-brightgreen" style="display: inline-block;" />
-<img alt="" src="https://img.shields.io/badge/cjc-v0.53.5-brightgreen" style="display: inline-block;" />
+<img alt="" src="https://img.shields.io/badge/cjc-v0.53.12-brightgreen" style="display: inline-block;" />
 <img alt="" src="https://img.shields.io/badge/cjcov-NA-brightgreen" style="display: inline-block;" />
 <img alt="" src="https://img.shields.io/badge/project-open-brightgreen" style="display: inline-block;" />
 </p>
@@ -20,15 +20,18 @@ swipelayout4cj 用于设置屏幕顶部、底部、左侧和右侧的滑动布�
 
 ## 特性
 
-- 支持设置屏幕顶部、底部、左侧和右侧的滑动布局
+- SwipeLayout 支持设置屏幕顶部、底部、左侧和右侧的滑动布局；
+- SwipeLayoutLayDownFullList 支持设置右侧的滑动布局；
+- CustomContainerUserGrid 支持设置右侧的滑动布局；
+- SwipeLayoutLayDownRoot 支持设置嵌套滑动容器；
 
 ### 源码目录
 
 ```shell
 ├─AppScope
-├─doc        # API文档和使用手册存放目录                   
-├─entry      # 示例代码文件夹                  
-├─swipelayout    # swipelayout 库文件夹                   
+├─doc            # API文档和使用手册存放目录                   
+├─entry          # 示例代码文件夹                  
+├─swipelayout    # swipelayout 库源目录                  
 │  └─src
 │      └─main
 │          ├─cangjie
@@ -41,7 +44,7 @@ swipelayout4cj 用于设置屏幕顶部、底部、左侧和右侧的滑动布�
 │          │      ├─swipe_layout_lay_down_root        # 嵌套式滑动容器
 │          │      ├─swipe_layout_lay_out              # 嵌套式滑动容器子容器
 │          └─resources
-├─hvigor  # 构建工具目录
+├─hvigor     # 构建工具目录
 ├─README.md  # swipelayout4cj 介绍及使用说明
 ```
 ## 接口说明
