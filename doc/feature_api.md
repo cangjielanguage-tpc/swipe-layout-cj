@@ -1,8 +1,8 @@
-# swipelayout4cj 特性文档
+# swipe-layout-cj 特性文档
 
 ## 介绍
 
-swipelayout4cj 用于设置屏幕顶部、底部、左侧和右侧的滑动布局。
+swipe-layout-cj 用于设置屏幕顶部、底部、左侧和右侧的滑动布局。
 
 ## 1 自定义滑动容器
 
