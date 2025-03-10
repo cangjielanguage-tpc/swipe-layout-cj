@@ -29,7 +29,7 @@ import ohos.prompt_action.*
 
 @Entry
 @Component
-class MyView {
+class EntryView {
     @State
     var isTouch: Bool = true
     var dialogController: CustomDialogController = CustomDialogController(
