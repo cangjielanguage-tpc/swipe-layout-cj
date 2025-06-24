@@ -3,20 +3,11 @@
  */
 package swipelayout
 
-import ohos.base.*
-import ohos.component.*
-import ohos.state_manage.*
 import ohos.state_macro_manage.*
-import ohos.resource_manager.*
-import cj_res_swipelayout.app
-import ohos.prompt_action.*
-import std.math.abs
-import ohos.display.*
 
 @Component
 public class SwipeLayout {
-    @Link
-    var parentIsTouch: Bool
+    @Link var parentIsTouch: Bool
     private var mDuration: Int32 = 200
     @BuilderParam
     let surfaceView: () -> Unit
@@ -40,10 +31,8 @@ public class SwipeLayout {
     private var layoutLeft: Bool = true
     private var layoutBottom: Bool = true
     private var layoutTop: Bool = true
-    @State
-    var offsetX: Float64 = 0.0
-    @State
-    var offsetY: Float64 = 0.0
+    @State var offsetX: Float64 = 0.0
+    @State var offsetY: Float64 = 0.0
     private var rightSlideEnable = true
     private var leftSlideEnable = true
     private var topSlideEnable = true
@@ -68,11 +57,7 @@ public class SwipeLayout {
             this.bottomViewLeftW
         }
 
-        this.mWidth = if (this.mWidth > 100.0) {
-            100.0
-        } else {
-            this.mWidth
-        }
+        this.mWidth = if (this.mWidth > 100.0) { 100.0 } else { this.mWidth }
     }
 
     func build() {
@@ -108,10 +93,10 @@ public class SwipeLayout {
                         let moveY = event.touches[0].screenY - this.sY
                         animateTo(
                             AnimateParam(
-                                duration: this.mDuration, // 动画时长
-                                tempo: 1.0, // 播放速率
                                 curve: Curve.FastOutLinearIn, // 动画曲线
                                 iterations: 1, // 播放次数
+                                duration: this.mDuration, // 动画时长
+                                tempo: 1.0, // 播放速率
                                 playMode: PlayMode.Normal, // 动画模式
                                 onFinish: {
                                     =>
@@ -171,9 +156,9 @@ public class SwipeLayout {
                                 AnimateParam(
                                     duration: this.mDuration, // 动画时长
                                     tempo: 1.0, // 播放速率
+                                    playMode: PlayMode.Normal, // 动画模式
                                     curve: Curve.FastOutLinearIn, // 动画曲线
                                     iterations: 1, // 播放次数
-                                    playMode: PlayMode.Normal, // 动画模式
                                     onFinish: {
                                         =>
                                         this.rightSlideEnable = true
@@ -235,9 +220,9 @@ public class SwipeLayout {
                                                 -moveX <= this.bottomViewRightW) {
                                                 this.offsetX = moveX
                                             } else if (-moveX > this.bottomViewRightW) {
+                                                this.leftSlideEnable = false
                                                 this.offsetX = -this.bottomViewRightW
                                                 this.sX = event.touches[0].screenX
-                                                this.leftSlideEnable = false
                                             }
                                         }
                                     } else if (layoutLeft && moveX > 0.0 && moveY < 30.0 && moveY > -30.0) { //右滑
@@ -258,9 +243,9 @@ public class SwipeLayout {
                                                 this.bottomViewLeftW) {
                                                 this.offsetX = moveX
                                             } else if (moveX > this.bottomViewRightW) {
+                                                this.rightSlideEnable = false
                                                 this.offsetX = this.bottomViewLeftW
                                                 this.sX = event.touches[0].screenX
-                                                this.rightSlideEnable = false
                                             }
                                         }
                                     }
@@ -315,11 +300,11 @@ public class SwipeLayout {
                             let moveY = event.touches[0].screenY - this.sY
                             animateTo(
                                 AnimateParam(
-                                    duration: this.mDuration, // 动画时长
                                     tempo: 1.0, // 播放速率
                                     curve: Curve.FastOutLinearIn, // 动画曲线
                                     iterations: 1, // 播放次数
                                     playMode: PlayMode.Normal, // 动画模式
+                                    duration: this.mDuration, // 动画时长
                                     onFinish: {
                                         =>
                                         this.rightSlideEnable = true
@@ -330,34 +315,7 @@ public class SwipeLayout {
                                 ),
                                 {
                                     =>
-                                    if (this.offsetX > 0.0 && this.leftSlideEnable) {
-                                        if (moveX >= 40.0) {
-                                            this.offsetX = this.bottomViewLeftW
-                                        } else if (moveX > 0.0) {
-                                            this.offsetX = 0.0
-                                        }
-                                        if (moveX < -40.0) {
-                                            this.offsetX = 0.0
-                                        } else if (moveX < 0.0) {
-                                            this.offsetX = this.bottomViewLeftW
-                                        }
-                                        return
-                                    }
-
-                                    if (this.offsetX < 0.0 && this.rightSlideEnable) {
-                                        if (moveX >= 40.0) {
-                                            this.offsetX = 0.0
-                                        } else if (moveX > 0.0) {
-                                            this.offsetX = -this.bottomViewRightW
-                                        }
-
-                                        if (moveX <= -40.0) {
-                                            this.offsetX = -this.bottomViewRightW
-                                        } else if (moveX < 0.0) {
-                                            this.offsetX = 0.0
-                                        }
-                                        return
-                                    }
+                                    this.offsetX = CommonFunc.offsetXCalculate(offsetX, leftSlideEnable, bottomViewLeftW, moveX, rightSlideEnable, bottomViewRightW)
 
                                     if (this.offsetY > 0.0 && this.topSlideEnable) {
                                         if (abs(moveY) >= 20.0) {

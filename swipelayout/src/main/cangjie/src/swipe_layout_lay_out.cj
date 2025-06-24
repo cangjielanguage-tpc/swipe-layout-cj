@@ -3,19 +3,11 @@
  */
 package swipelayout
 
-import ohos.base.*
-import ohos.component.*
-import ohos.state_manage.*
 import ohos.state_macro_manage.*
-import ohos.resource_manager.*
-import cj_res_swipelayout.app
-import ohos.prompt_action.*
-import std.math.abs
 
 @Component
 public class SwipeLayoutLayOut {
-    @Link
-    var parentIsTouch: Bool
+    @Link var parentIsTouch: Bool
     private var mDuration: Int32 = 200
     private var sX: Float64 = 0.0
     private var sY: Float64 = 0.0
@@ -23,25 +15,17 @@ public class SwipeLayoutLayOut {
     private var mHeight: Float64 = 90.0
     private var bottomViewRightW: Float64 = 180.0
     private var bottomViewLeftW: Float64 = 120.0
-    @BuilderParam
-    let surfaceView: () -> Unit
-    @BuilderParam
-    let bottomViewRight: () -> Unit
-    @State
-    var offsetX: Float64 = 0.0
-    @State
-    var offsetY: Float64 = 0.0
+    @BuilderParam let surfaceView: () -> Unit
+    @BuilderParam let bottomViewRight: () -> Unit
+    @State var offsetX: Float64 = 0.0
+    @State var offsetY: Float64 = 0.0
     private var rightSlideEnable: Bool = true
     private var leftSlideEnable: Bool = true
     private var previousX: Float64 = 0.0
     private var enableSlide: Array<Bool> = [false, false, true, false]
 
     protected override func aboutToAppear() {
-        this.mWidth = if (this.mWidth > 100.0) {
-            100.0
-        } else {
-            this.mWidth
-        }
+        this.mWidth = if (this.mWidth > 100.0) { 100.0 } else { this.mWidth }
     }
 
     func build() {
@@ -189,34 +173,7 @@ public class SwipeLayoutLayOut {
                                 ),
                                 {
                                     =>
-                                    if (this.offsetX > 0.0 && this.leftSlideEnable) {
-                                        if (moveX >= 40.0) {
-                                            this.offsetX = this.bottomViewLeftW
-                                        } else if (moveX > 0.0) {
-                                            this.offsetX = 0.0
-                                        }
-                                        if (moveX < -40.0) {
-                                            this.offsetX = 0.0
-                                        } else if (moveX < 0.0) {
-                                            this.offsetX = this.bottomViewLeftW
-                                        }
-                                        return
-                                    }
-
-                                    if (this.offsetX < 0.0 && this.rightSlideEnable) {
-                                        if (moveX >= 40.0) {
-                                            this.offsetX = 0.0
-                                        } else if (moveX > 0.0) {
-                                            this.offsetX = -this.bottomViewRightW
-                                        }
-
-                                        if (moveX <= -40.0) {
-                                            this.offsetX = -this.bottomViewRightW
-                                        } else if (moveX < 0.0) {
-                                            this.offsetX = 0.0
-                                        }
-                                        return
-                                    }
+                                    this.offsetX = CommonFunc.offsetXCalculate(offsetX, leftSlideEnable, bottomViewLeftW, moveX, rightSlideEnable, bottomViewRightW)
 
                                     if (this.offsetY > 0.0) {
                                         if (abs(moveY) >= 20.0) {

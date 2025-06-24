@@ -3,19 +3,11 @@
  */
 package swipelayout
 
-import ohos.base.*
-import ohos.component.*
-import ohos.state_manage.*
 import ohos.state_macro_manage.*
-import ohos.resource_manager.*
-import cj_res_swipelayout.app
-import ohos.prompt_action.*
-import std.math.abs
 
 @Component
 public class SwipeLayoutLayDownFull {
-    @Link
-    var parentIsTouch: Bool
+    @Link var parentIsTouch: Bool
     private var mDuration: Int32 = 200
     private var sX: Float64 = 0.0
     private var sY: Float64 = 0.0
@@ -25,83 +17,24 @@ public class SwipeLayoutLayDownFull {
     private var bottomViewLeftW: Float64 = 120.0
     private var bottomViewTopH: Float64 = 100.0
     private var bottomViewBottomH: Float64 = 100.0
-    @BuilderParam
-    let surfaceView: () -> Unit
-    @BuilderParam
-    let bottomViewRight: () -> Unit
-    @BuilderParam
-    let bottomViewTop: () -> Unit
-    @State
-    var offsetX: Float64 = 0.0
-    @State
-    var offsetY: Float64 = 0.0
+    @BuilderParam let surfaceView: () -> Unit
+    @BuilderParam let bottomViewRight: () -> Unit
+    @BuilderParam let bottomViewTop: () -> Unit
+    @State var offsetX: Float64 = 0.0
+    @State var offsetY: Float64 = 0.0
     private var rightSlideEnable: Bool = true
     private var leftSlideEnable: Bool = true
     private var previousX: Float64 = 0.0
     private var enableSlide: Array<Bool> = [false, true, true, false]
 
     protected override func aboutToAppear() {
-        this.mWidth = if (this.mWidth > 100.0) {
-            100.0
-        } else {
-            this.mWidth
-        }
+        this.mWidth = if (this.mWidth > 100.0) { 100.0 } else { this.mWidth }
     }
     func build() {
         Column() {
-            Column() {
-                this.bottomViewTop()
-            }.position(x: 0.0, y: -this.bottomViewTopH).onTouch(
-                {
-                    event =>
-                    if (event.eventType.toString() == "Down") {
-                        this.parentIsTouch = false
-                        this.sX = event.touches[0].screenX
-                        this.sY = event.touches[0].screenY
-                    }
-
-                    if (event.eventType.toString() == "Move") {
-                        let moveX = event.touches[0].screenX - this.sX
-                        let moveY = event.touches[0].screenY - this.sY
-                        if (abs(moveX) < abs(moveY)) { //纵向滑动
-                            if (moveY < 0.0) { //上滑
-                                //顶侧菜单开始关闭
-                                if (this.offsetY > 0.0) {
-                                    if (this.mHeight - abs(moveY) >= 0.0) {
-                                        this.offsetY = this.bottomViewTopH + moveY
-                                        return
-                                    }
-                                }
-                            }
-                        }
-                    }
-
-                    if (event.eventType.toString() == "Up") {
-                        let moveY = event.touches[0].screenY - this.sY
-                        if (moveY >= 0.0) {
-                            return
-                        }
-                        animateTo(
-                            AnimateParam(
-                                duration: this.mDuration, // 动画时长
-                                tempo: 1.0, // 播放速率
-                                curve: Curve.FastOutLinearIn, // 动画曲线
-                                iterations: 1, // 播放次数
-                                playMode: PlayMode.Normal, // 动画模式
-                            ),
-                            {
-                                => if (this.offsetY > 0.0) {
-                                    if (abs(moveY) >= 20.0) {
-                                        this.offsetY = 0.0
-                                    } else {
-                                        this.offsetY = this.bottomViewTopH
-                                    }
-                                }
-                            }
-                        )
-                        this.parentIsTouch = true
-                    }
-                }
+            BottomViewTop(
+                bottomViewTop: bottomViewTop,bottomViewTopH: bottomViewTopH,parentIsTouch: parentIsTouch,offsetX: offsetX,
+                offsetY: offsetY, mHeight: mHeight, mDuration:mDuration
             )
 
             Row() {
@@ -237,52 +170,8 @@ public class SwipeLayoutLayDownFull {
                                 ),
                                 {
                                     =>
-                                    if (this.offsetX > 0.0 && this.leftSlideEnable) {
-                                        if (moveX >= 40.0) {
-                                            this.offsetX = this.bottomViewLeftW
-                                        } else if (moveX > 0.0) {
-                                            this.offsetX = 0.0
-                                        }
-                                        if (moveX < -40.0) {
-                                            this.offsetX = 0.0
-                                        } else if (moveX < 0.0) {
-                                            this.offsetX = this.bottomViewLeftW
-                                        }
-                                        return
-                                    }
-
-                                    if (this.offsetX < 0.0 && this.rightSlideEnable) {
-                                        if (moveX >= 40.0) {
-                                            this.offsetX = 0.0
-                                        } else if (moveX > 0.0) {
-                                            this.offsetX = -this.bottomViewRightW
-                                        }
-
-                                        if (moveX <= -40.0) {
-                                            this.offsetX = -this.bottomViewRightW
-                                        } else if (moveX < 0.0) {
-                                            this.offsetX = 0.0
-                                        }
-                                        return
-                                    }
-
-                                    if (this.offsetY > 0.0) {
-                                        if (moveY >= 20.0) {
-                                            this.offsetY = this.bottomViewTopH
-                                        } else {
-                                            this.offsetY = 0.0
-                                        }
-                                        return
-                                    }
-
-                                    if (this.offsetY < 0.0) {
-                                        if (moveY <= -20.0) {
-                                            this.offsetY = -this.bottomViewBottomH
-                                        } else {
-                                            this.offsetY = 0.0
-                                        }
-                                        return
-                                    }
+                                    this.offsetX = CommonFunc.offsetXCalculate(offsetX, leftSlideEnable, bottomViewLeftW, moveX, rightSlideEnable, bottomViewRightW)
+                                    this.offsetY = CommonFunc.offseYCalculate(offsetY, bottomViewTopH, moveY, bottomViewBottomH)
                                 }
                             )
                             this.parentIsTouch = true

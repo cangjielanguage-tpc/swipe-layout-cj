@@ -3,58 +3,39 @@
  */
 package swipelayout
 
-import ohos.base.*
-import ohos.component.*
-import ohos.state_manage.*
 import ohos.state_macro_manage.*
-import ohos.resource_manager.*
-import cj_res_swipelayout.app
-import ohos.prompt_action.*
-import std.math.abs
-import ohos.display.*
 
 @Component
 public class SwipeLayoutLayDownFullGrid {
-    @Link
-    var itemContent: String = ""
-    @Link
-    var itemId: Int64 = 0
+    @Link var itemContent: String = ""
+    @Link var itemId: Int64 = 0
     private var mDuration: Int32 = 200
-    private var sX: Float64 = 0.0
-    private var sY: Float64 = 0.0
     private var mWidth: Float64 = 100.0
     private var mHeight: Float64 = 90.0
-    private var bottomViewRightW: Float64 = 320.0
-    private var bottomViewLeftW: Float64 = 120.0
+    private var sX: Float64 = 0.0
+    private var sY: Float64 = 0.0
     private var bottomViewTopH: Float64 = 100.0
     private var bottomViewBottomH: Float64 = 100.0
-    @BuilderParam
-    let surfaceView: (String, Int64) -> Unit
-    @BuilderParam
-    let bottomViewRight: (Int64) -> Unit
-    @State
-    var offsetX: Float64 = 0.0
-    @State
-    var offsetY: Float64 = 0.0
-    private var rightSlideEnable: Bool = true
+    private var bottomViewRightW: Float64 = 320.0
+    private var bottomViewLeftW: Float64 = 120.0
+    @BuilderParam let surfaceView: (String, Int64) -> Unit
+    @BuilderParam let bottomViewRight: (Int64) -> Unit
+    @State var offsetY: Float64 = 0.0
+    @State var offsetX: Float64 = 0.0
     private var leftSlideEnable: Bool = true
+    private var rightSlideEnable: Bool = true
     private var previousX: Float64 = 0.0
     private var enableSlide: Array<Bool> = [false, true, true, false]
 
     protected override func aboutToAppear() {
-        var screenW: Float64 = px2vp(Length(Float64(getDefaultDisplaySync().width), unitType: LengthType.px)).getOrThrow(
-            ).value
+        var screenW: Float64 = px2vp(Length(Float64(getDefaultDisplaySync().width), unitType: LengthType.px)).getOrThrow().value
+        this.mWidth = if (this.mWidth > 100.0) { 100.0 } else { this.mWidth }
         this.bottomViewRightW = if (bottomViewRightW >= screenW) {
             screenW
         } else if (bottomViewRightW < 0.0) {
             0.0
         } else {
             this.bottomViewRightW
-        }
-        this.mWidth = if (this.mWidth > 100.0) {
-            100.0
-        } else {
-            this.mWidth
         }
     }
 
