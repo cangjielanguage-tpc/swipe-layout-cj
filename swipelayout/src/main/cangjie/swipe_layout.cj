@@ -36,11 +36,13 @@ public class SwipeLayout {
     private var rightSlideEnable = true
     private var leftSlideEnable = true
     private var topSlideEnable = true
+
+
     private var bottomSlideEnable = true
     private var previousX: Float64 = 0.0
 
     protected override func aboutToAppear() {
-        var screenW: Float64 = px2vp(Length(Float64(getDefaultDisplaySync().width), unitType: LengthType.px)).getOrThrow(
+        var screenW: Float64 = px2vp(Float64(getDefaultDisplaySync().width).px).getOrThrow(
             ).value
         this.bottomViewRightW = if (bottomViewRightW >= screenW) {
             screenW

@@ -28,7 +28,7 @@ public class SwipeLayoutLayDownFullGrid {
     private var enableSlide: Array<Bool> = [false, true, true, false]
 
     protected override func aboutToAppear() {
-        var screenW: Float64 = px2vp(Length(Float64(getDefaultDisplaySync().width), unitType: LengthType.px)).getOrThrow().value
+        var screenW: Float64 = px2vp(Float64(getDefaultDisplaySync().width).px).getOrThrow().value
         this.mWidth = if (this.mWidth > 100.0) { 100.0 } else { this.mWidth }
         this.bottomViewRightW = if (bottomViewRightW >= screenW) {
             screenW

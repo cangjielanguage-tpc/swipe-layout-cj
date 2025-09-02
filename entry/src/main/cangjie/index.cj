@@ -1,7 +1,3 @@
-/*
- * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
- */
-
 package ohos_app_cangjie_entry
 
 internal import ohos.base.LengthProp
@@ -12,6 +8,7 @@ internal import ohos.component.Text
 internal import ohos.component.CustomView
 internal import ohos.component.CJEntry
 internal import ohos.component.loadNativeView
+internal import ohos.component.FontWeight
 internal import ohos.state_manage.SubscriberManager
 internal import ohos.state_manage.ObservedProperty
 internal import ohos.state_manage.LocalStorage
@@ -19,13 +16,15 @@ import ohos.state_macro_manage.Entry
 import ohos.state_macro_manage.Component
 import ohos.state_macro_manage.State
 import ohos.state_macro_manage.r
-import swipelayout.*
+import ohos.state_macro_manage.Builder
+import ohos.state_macro_manage.CustomDialog
 import ohos.base.*
 import ohos.component.*
 import ohos.state_manage.*
-import ohos.state_macro_manage.*
 import ohos.router.*
 import ohos.prompt_action.*
+import swipelayout.*
+import ohos.resource_manager.{ __GenerateResource__}
 
 @Entry
 @Component
