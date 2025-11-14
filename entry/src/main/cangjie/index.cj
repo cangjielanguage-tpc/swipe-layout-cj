@@ -26,6 +26,7 @@ import ohos.state_manage.*
 import ohos.state_macro_manage.*
 import ohos.router.*
 import ohos.prompt_action.*
+import ohos.resource_manager.__GenerateResource__
 
 @Entry
 @Component
