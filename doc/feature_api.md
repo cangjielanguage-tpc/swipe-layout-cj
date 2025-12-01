@@ -293,7 +293,7 @@ public class CustomContainerUserList {
 
 ```cangjie
 @Component
-public class CustomContainerUserGrid {
+public class SwipeLayoutLayDownFullGrid {
     @BuilderParam
     let surfaceView: (String, Int64) -> Unit   // 滑动组件
     @BuilderParam
@@ -385,8 +385,8 @@ class CustomContainerUserGrid {
 ```cangjie
 @Component
 public class SwipeLayoutLayDownRoot {
-    BuilderParam
-    let surfaceView: () -> Unit              // 滑动组件  
+    @BuilderParam
+    var innerSwipeLayout: () -> Unit              // 滑动组件  
     @BuilderParam
     let bottomViewRight: () -> Unit          // 设置右侧滑动布局样式
     @BuilderParam
