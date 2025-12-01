@@ -12,8 +12,8 @@ public class SwipeLayoutLayDownFullList {
     private var mDuration: Int32 = 200
     private var sX: Float64 = 0.0
     private var sY: Float64 = 0.0
-    private var mWidth: Float64 = 100.0
-    private var mHeight: Float64 = 90.0
+    public var mWidth: Float64 = 100.0
+    public var mHeight: Float64 = 90.0
     private var bottomViewRightW: Float64 = 320.0
     private var bottomViewLeftW: Float64 = 120.0
     private var bottomViewTopH: Float64 = 100.0
@@ -28,8 +28,8 @@ public class SwipeLayoutLayDownFullList {
     private var enableSlide: Array<Bool> = [false, true, true, false]
 
     protected override func aboutToAppear() {
-        var screenW: Float64 = px2vp(Float64(getDefaultDisplaySync().width).px).getOrThrow(
-            ).value
+        var screenW: Float64 = (px2vp(Float64(getDefaultDisplaySync().width).px)??Float64(
+                getDefaultDisplaySync().width).px).value
         this.bottomViewRightW = if (bottomViewRightW >= screenW) {
             screenW
         } else if (bottomViewRightW < 0.0) {

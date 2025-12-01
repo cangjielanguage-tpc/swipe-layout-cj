@@ -21,8 +21,8 @@ public class SwipeLayout {
     let bottomViewBottom: () -> Unit
     private var sX: Float64 = 0.0
     private var sY: Float64 = 0.0
-    private var mWidth: Float64 = 100.0
-    private var mHeight: Float64 = 180.0
+    public var mWidth: Float64 = 100.0
+    public var mHeight: Float64 = 180.0
     private var bottomViewRightW: Float64 = 180.0
     private var bottomViewLeftW: Float64 = 180.0
     private var bottomViewTopH: Float64 = 100.0
@@ -40,8 +40,8 @@ public class SwipeLayout {
     private var previousX: Float64 = 0.0
 
     protected override func aboutToAppear() {
-        var screenW: Float64 = px2vp(Float64(getDefaultDisplaySync().width).px).getOrThrow(
-            ).value
+        var screenW: Float64 = (px2vp(Float64(getDefaultDisplaySync().width).px)??Float64(
+                getDefaultDisplaySync().width).px).value
         this.bottomViewRightW = if (bottomViewRightW >= screenW) {
             screenW
         } else if (bottomViewRightW < 0.0) {

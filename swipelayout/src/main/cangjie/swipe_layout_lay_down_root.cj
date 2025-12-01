@@ -11,8 +11,8 @@ public class SwipeLayoutLayDownRoot {
     private var mDuration: Int32 = 200
     private var sX: Float64 = 0.0
     private var sY: Float64 = 0.0
-    private var mWidth: Float64 = 100.0
-    private var mHeight: Float64 = 90.0
+    public var mWidth: Float64 = 100.0
+    public var mHeight: Float64 = 90.0
     private var bottomViewRightW: Float64 = 120.0
     private var bottomViewLeftW: Float64 = 120.0
     private var bottomViewTopH: Float64 = 120.0

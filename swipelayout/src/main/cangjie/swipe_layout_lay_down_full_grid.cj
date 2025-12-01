@@ -10,8 +10,8 @@ public class SwipeLayoutLayDownFullGrid {
     @Link var itemContent: String = ""
     @Link var itemId: Int64 = 0
     private var mDuration: Int32 = 200
-    private var mWidth: Float64 = 100.0
-    private var mHeight: Float64 = 90.0
+    public var mWidth: Float64 = 100.0
+    public var mHeight: Float64 = 90.0
     private var sX: Float64 = 0.0
     private var sY: Float64 = 0.0
     private var bottomViewTopH: Float64 = 100.0
@@ -28,7 +28,8 @@ public class SwipeLayoutLayDownFullGrid {
     private var enableSlide: Array<Bool> = [false, true, true, false]
 
     protected override func aboutToAppear() {
-        var screenW: Float64 = px2vp(Float64(getDefaultDisplaySync().width).px).getOrThrow().value
+        var screenW: Float64 = (px2vp(Float64(getDefaultDisplaySync().width).px)??Float64(
+                getDefaultDisplaySync().width).px).value
         this.mWidth = if (this.mWidth > 100.0) { 100.0 } else { this.mWidth }
         this.bottomViewRightW = if (bottomViewRightW >= screenW) {
             screenW
