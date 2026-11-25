@@ -3,10 +3,10 @@
 </div>
 
 <p align="center">
-<img alt="" src="https://img.shields.io/badge/release-v0.0.1-brightgreen" style="display: inline-block;" />
+<img alt="" src="https://img.shields.io/badge/release-v1.0.1-brightgreen" style="display: inline-block;" />
 <img alt="" src="https://img.shields.io/badge/build-pass-brightgreen" style="display: inline-block;" />
-<img alt="" src="https://img.shields.io/badge/cjc-v0.53.20-brightgreen" style="display: inline-block;" />
-<img alt="" src="https://img.shields.io/badge/cjcov-NA-brightgreen" style="display: inline-block;" />
+<img alt="" src="https://img.shields.io/badge/cjc-v1.1.3-brightgreen" style="display: inline-block;" />
+<img alt="" src="https://img.shields.io/badge/cjcov-90.4%25-brightgreen" style="display: inline-block;" />
 <img alt="" src="https://img.shields.io/badge/project-open-brightgreen" style="display: inline-block;" />
 </p>
 
@@ -56,26 +56,13 @@ swipe-layout-cj 用于设置屏幕顶部、底部、左侧和右侧的滑动布�
 1. 通过 module 引入
     1. 克隆下载项目
     2. 将 swipelayout 模块拷贝到应用项目下
-    3. 修改自身应用 entry 下的 oh-package.json5 文件，在 dependencies 字段添加 "swipelayout": "file:../swipelayout"
-      ```json
-      {
-         "name": "entry",
-         "version": "1.0.0",
-         "description": "Please describe the basic information.",
-         "main": "",
-         "author": "",
-         "license": "",
-        "dependencies": {
-            "markdown": "file:../swipelayout"
-        }
-      }
+    3. entry 下的 cjpm.toml 文件, 在此文件中添加swipelayout依赖，如下：
+      ```toml
+      [dependencies]
+         [dependencies.swipelayout]  
+           path = "../swipelayout"
       ```
-    4. 修改自身应用 entry/src/main/cangjie 下的 cjpm.toml 文件，在 [dependencies] 字段下添加 swipelayout = {path = "../../../../swipelayout/src/main/cangjie", version = "1.0.0"}
-       ```toml
-       [dependencies]
-           swipelayout = {path = "../../../../swipelayout/src/main/cangjie", version = "1.0.0"}
-       ```
-    5. 在项目中使用 import swipelayout.* 引用 swipelayout 项目
+   4. 在项目中使用 import swipelayout.* 引用 swipelayout 项目
        ```cangjie
        import swipelayout.*
        ```
@@ -91,7 +78,8 @@ swipe-layout-cj 用于设置屏幕顶部、底部、左侧和右侧的滑动布�
     2. 修改自身应用 entry/src/main/cangjie 下的 cjpm.toml 文件，添加依赖
     ```toml
     [dependencies]
-        swipelayout = {path = "../../../../third-party/swipe-layout-cj/swipelayout/src/main/cangjie", version = "1.0.0"}
+         [dependencies.swipelayout]  
+           path = "../swipelayout"
      ```
     3. 在项目中使用 swipelayout 组件
        ```cangjie
@@ -258,8 +246,9 @@ class CustomContainerUserGrid {
 
 在下述版本验证通过：
 
-    DevEco Studio 5.0.13.200
-    Cangjie Support Plugin 5.0.13.200
+    DevEco Studio 6.1.1 Release(6.1.1.280)
+
+- SdkVersion需使用20及以上版本
 
 ## 开源协议
 

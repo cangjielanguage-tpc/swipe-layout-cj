@@ -3,7 +3,8 @@
     "name": "swipelayout",
     "type": "har",
     "deviceTypes": [
-      "default"
+      "default",
+      "tablet"
     ]
   }
 }

@@ -32,15 +32,14 @@ public class SwipeLayout {
     var mHeight: Float64                     // 设置组件高度，单位 vp，当小于 0.0 时，取 0.0
     var bottomViewRightW: Float64            // 设置右侧布局宽度，单位 vp，范围（0 ~ 当前设备屏幕宽度）
     var bottomViewLeftW: Float64             // 设置左侧布局宽度，单位 vp，范围（0 ~ 当前设备屏幕宽度）
-    var bottomViewTopH: Float64              // 设置顶部布局宽度，单位 vp，当小于 0.0 时，取 0.0
-    var bottomViewBottomH: Float64           // 设置底部布局宽度，单位 vp，当小于 0.0 时，取 0.0
+    var bottomViewTopH: Float64              // 设置顶部布局高度，单位 vp，当小于 0.0 时，取 0.0
+    var bottomViewBottomH: Float64           // 设置底部布局高度，单位 vp，当小于 0.0 时，取 0.0
     var layoutRight: Bool                    // 是否开启右侧滑动，默认 true
     var layoutLeft: Bool                     // 是否开启左侧滑动，默认 true
     var layoutBottom: Bool                   // 是否开启底部滑动，默认 true    
     var layoutTop: Bool                      // 是否开启顶部滑动，默认 true
     @Link
     var parentIsTouch: Bool                  // 父组件是否触摸（用作组件嵌套）
-    var mDuration: Int32                     // 设置动画持续时间，默认 200 ms
 }
 ```
 
@@ -201,7 +200,6 @@ public class SwipeLayoutLayDownFullList {
     var mWidth: Float64                        // 设置组件宽度，单位 百分比，范围（0 ~ 100.0）
     var mHeight: Float64                       // 设置组件高度，单位 vp，当小于 0.0 时，取 0.0
     var bottomViewRightW: Float64              // 设置右侧布局宽度，单位 vp，范围（0 ~ 当前设备屏幕宽度）
-    var mDuration: Int32                       // 设置动画持续时间，默认 200 ms
 }
 ```
 ### 2.2 示例
@@ -285,7 +283,7 @@ public class CustomContainerUserList {
 
 ## 3 Grid 滑动容器
 
-### 3.1 CustomContainerUserGrid Component API Description
+### 3.1 SwipeLayoutLayDownFullGrid Component API Description
 
 - 组件使用时推荐用 ColumnSplit 包裹
 - 用户自定义 surfaceView 滑动组件宽度、高度推荐和组件宽度、高度（ mWidth、mHeight）保持一致。
@@ -293,7 +291,7 @@ public class CustomContainerUserList {
 
 ```cangjie
 @Component
-public class CustomContainerUserGrid {
+public class SwipeLayoutLayDownFullGrid {
     @BuilderParam
     let surfaceView: (String, Int64) -> Unit   // 滑动组件
     @BuilderParam
@@ -305,7 +303,6 @@ public class CustomContainerUserGrid {
     var mWidth: Float64                        // 设置组件宽度，单位 百分比，范围（0 ~ 100.0）
     var mHeight: Float64                       // 设置组件高度，单位 vp，当小于 0.0 时，取 0.0
     var bottomViewRightW: Float64              // 设置右侧布局宽度，单位 vp，范围（0 ~ 当前设备屏幕宽度）
-    var mDuration: Int32                       // 设置动画持续时间，默认 200 ms
 }
 ```
 ### 3.2 示例
@@ -385,8 +382,8 @@ class CustomContainerUserGrid {
 ```cangjie
 @Component
 public class SwipeLayoutLayDownRoot {
-    BuilderParam
-    let surfaceView: () -> Unit              // 滑动组件  
+    @BuilderParam
+    var innerSwipeLayout: () -> Unit              // 滑动组件  
     @BuilderParam
     let bottomViewRight: () -> Unit          // 设置右侧滑动布局样式
     @BuilderParam
@@ -403,7 +400,6 @@ public class SwipeLayoutLayDownRoot {
     var bottomViewBottomH: Float64           // 设置底部布局宽度，单位 vp，当小于 0.0 时，取 0.0
     @Link    
     var isTouch: Bool                        // 父组件是否触摸（用作组件嵌套）
-    var mDuration: Int32                     // 设置动画持续时间，默认 200 ms
 }
 ```
 ### 4.2 示例

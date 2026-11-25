@@ -21,6 +21,20 @@ public class BottomViewTop {
     @Link  var mHeight: Float64 = 90.0
     @Link var mDuration: Int32 = 200
 
+    func builderParam(moveX: Float64, moveY: Float64){
+        if (abs(moveX) < abs(moveY)) { //纵向滑动
+            if (moveY < 0.0) { //上滑
+                //顶侧菜单开始关闭
+                if (this.offsetY > 0.0) {
+                    if (this.mHeight - abs(moveY) >= 0.0) {
+                        this.offsetY = this.bottomViewTopH + moveY
+                        return
+                    }
+                }
+            }
+        }
+    }
+
     func build() {
         Column() {
             this.bottomViewTop()
@@ -36,17 +50,7 @@ public class BottomViewTop {
                 if (event.eventType.toString() == "Move") {
                     let moveX = event.touches[0].screenX - this.sX
                     let moveY = event.touches[0].screenY - this.sY
-                    if (abs(moveX) < abs(moveY)) { //纵向滑动
-                        if (moveY < 0.0) { //上滑
-                            //顶侧菜单开始关闭
-                            if (this.offsetY > 0.0) {
-                                if (this.mHeight - abs(moveY) >= 0.0) {
-                                    this.offsetY = this.bottomViewTopH + moveY
-                                    return
-                                }
-                            }
-                        }
-                    }
+                    builderParam(moveX, moveY)
                 }
 
                 if (event.eventType.toString() == "Up") {
